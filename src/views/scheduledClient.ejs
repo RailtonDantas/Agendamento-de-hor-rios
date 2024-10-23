@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="h-screen w-screen bg-slate-900 flex flex-col gap-2 items-center overflow-x-hidden">
+    <header class="w-screen h-1/5 bg-slate-700 border-b border-b-white flex flex-row items-center justify-center">
+        <h1 class="text-white text-4xl text-center font-semibold">CLIENTE AGENDADO!</h1>
+    </header>
+    <main class="flex flex-col mt-10 border border-slate-700 h-fit gap-2 w-full items-center">
+        <div class="w-fit h-fit gap-2 p-2 bg-white border border-sky-700 rounded-lg">
+            <p class="text-slate-900 font-semibold tracking-wider text-lg">Nome: <%=name%></p>
+            <p class="text-slate-900 font-semibold tracking-wider text-lg">Whatsapp: <%=whatsapp%></p>
+            <p class="text-slate-900 font-semibold tracking-wider text-lg">Data: <%=date%></p>
+            <p class="text-slate-900 font-semibold tracking-wider text-lg">Hora: <%=hour%></p>
+            <p class="text-slate-900 font-semibold tracking-wider text-lg">serviços: <% for(let key in services){ %>
+                <%=services[key]%>
+            <%}%></p>
+        </div>
+    </main>
+    
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="assets/js/main.js" defer></script>
+    <style>
+        *{
+            scrollbar-width: none;
+        }
+        .effect:hover div{
+            background-color: rgb(255, 255, 255);
+            scale: 1.1;
+            transition-duration: 300ms;
+        }
+        .effect:hover > :nth-child(1){
+            background-color: white;
+            scale: 1;
+        }
+        .effect:hover > :not(:hover){
+            background-color: #64748b;
+            scale: 1;
+        }
+        .effect:hover > :nth-child(1):not(:hover){
+            background-color: white;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen bg-slate-900 flex flex-col gap-2 items-center overflow-x-hidden">
+    <header class="h-fit w-full bg-slate-700 flex flex-col justify-around px-2 pb-2 border-b border-b-white relative">
+        <i class="bi bi-scissors text-slate-900 absolute top-7 right-24 z-0" style="rotate: -135deg; scale: 5;"></i>
+        <h1 class="text-center text-white text-xl font-bold relative z-10" style="text-shadow: 0px 0px 2px black;">Agende seu horário conosco! <br>
+            <p class="text-3xl mt-2 font-black" style="text-shadow: 0px 0px 2px black;">Barber Shop</p>
+        </h1>
+        <nav class="text-white h-fit">
+            <i class="bi bi-telephone-fill text-white scale-150 cursor-pointer" id="btnContacts"></i>
+            <ul class="hidden">
+                <li>
+                    <i class="bi bi-whatsapp text-green-500"></i>
+                    <a>Contato para trabalho</a>
+                </li>
+                <li>
+                    <i class="bi bi-instagram bg-pink-400 px-0.5 rounded-md"></i>
+                    <a href="">user_@user</a>
+                </li>
+            </ul>
+        </nav>
+        <%if(lazyDays.length > 0){%>
+            <%const tittle = lazyDays.length == 1 ? 'A barbearia estará fechada no seguinte dia!' : 'A barbearia estará fechada nos seguintes dias'%>
+            <h1 class="text-center text-white text-xl font-bold"><%=tittle%></h1>
+            <ul class="h-fit flex flex-col p-2 gap-2 items-center w-full">
+                <%-include("includes/notices")%>
+            </ul>
+        <%}%>
+    </header>
+    <main class="flex flex-col h-5/6 w-11/12 bg-transparent gap-2">
+        <section class="h-1/3 w-full bg-slate-400 p-2 rounded-md border-2 border-gray-800 flex flex-col justify-around ">
+                <div class="flex flex-row w-full h-1/4  p-2 border border-black bg-white rounded justify-between items-center">
+                    <p class="text-start  font-semibold">Cabelo</p>
+                    <i class="bi bi-arrow-down-right  inline-block" style="rotate: -45deg;"></i>
+                    <p class="text-end  font-semibold"><%= prices.cabelo %> reais</p>
+                </div>
+                <div class="flex flex-row w-full h-1/4  p-2 border border-black bg-white rounded justify-between items-center">
+                    <p class="text-start  font-semibold">Sobrancelha</p>
+                    <i class="bi bi-arrow-down-right  m-auto inline-block" style="rotate: -45deg;"></i>
+                    <p class="text-end  font-semibold"><%= prices.sobrancelha%> reais</p>
+                </div>
+                <div class="flex flex-row w-full h-1/4  p-2 border border-black bg-white rounded justify-between items-center">
+                    <p class="text-start font-semibold">Barba</p>
+                    <i class="bi bi-arrow-down-right  inline-block" style="rotate: -45deg;"></i>
+                    <p class="text-end  font-semibold"><%= prices.barba%> reais</p>
+                </div>
+        </section>
+        <h3 class="text-center text-white text-xl font-bold">Horários!</h3>
+        <section class="flex flex-row w-full h-fit bg-slate-400 p-2 rounded-md border-2 border-gray-800 justify-evenly cursor-pointer">
+            <div class="h-full w-1/3 grow border border-slate-900 border border-r-0 flex flex-col items-center gap-2 pb-1 effect" >
+                <div class="text-center font-semibold font-sans text-black bg-white w-full border-b border-b-slate-900">Manhã</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">9:00</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">9:30</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">10:00</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">10:30</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">11:00</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">11:30</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">12:00</div>
+            </div>
+            <div class="h-full w-1/3 grow border border-slate-900 flex flex-col items-center gap-2 pb-1 effect">
+                <div class="text-center font-semibold font-sans text-black bg-white w-full border-b border-b-slate-900">Tarde</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">15:00</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">15:30</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">16:00</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">16:30</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">17:00</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">17:30</div>
+            </div>
+            <div class="h-full w-1/3 grow border border-slate-900 border-l-0 flex flex-col items-center gap-2 pb-1 effect">
+                <div class="text-center font-semibold font-sans text-black bg-white w-full border-b border-b-slate-900">Noite</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">18:00</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">18:30</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">19:00</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">19:30</div>
+                <div class="font-semibold w-11/12 h-6 border border-white rounded text-center">20:00</div>
+            </div>
+        </section>
+        <button class="w-1/4 h-7 bg-white border border-black rounded m-auto"><a href="/clientes/agendamento">Agendar</a></button>
+    </main>
+</body>
+</html>

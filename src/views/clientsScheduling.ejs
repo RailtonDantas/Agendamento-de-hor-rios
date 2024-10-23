@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="/assets/js/scheduling.js" defer></script>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+        }
+        html{
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen bg-slate-900 flex flex-col items-center gap-2 overflow-x-hidden">
+    <main class="flex flex-col h-screen w-full items-center self-center gap-2">
+        <section class="flex flex-col bg-slate-700 w-full h-3/4 rounded-lg items-center">
+            <form action="/clientes/consultandoHorarios" method="post" id="formDate" class="w-full h-fit bg-white flex flex-col items-center ">
+                <h1 class="text-xl text-black tracking-wider text-center font-semibold leading-5">Informe a data <br>que deseja agendar!</h1>
+                <input type="date" name="inputDate" id="inputDate" class="px-3 py-2 rounded-lg border border-slate-900 text-semibold block bg-sky-500 text-slate-900 outline-none" value="<%date%>">
+                <p class="text-sky-900 font-semibold mb-2 pb-2">Horários disponíveis  na data escolhida!</p>
+                <%-include('includes/notWorkInSunday')%>
+                <%-include("includes/invalidDate")%>
+            </form>
+            <div class="flex flex-row justify-around w-full">
+                <div class="h-full w-1/3 grow border border-slate-900 border border-r-0 border-l-0 flex flex-col items-center gap-2 pb-1 effect" >
+                    <div class="text-center font-semibold font-sans text-black bg-white w-full">Manhã</div>
+                    <%-include('includes/morningTimes')%>
+                </div>
+                <div class="h-full w-1/3 grow border border-slate-900 flex flex-col items-center gap-2 pb-1 effect">
+                    <div class="text-center font-semibold font-sans text-black bg-white w-full border-b border-b-slate-900">Tarde</div>
+                    <%-include('includes/afternoonTimes')%>
+                </div>
+                <div class="h-full w-1/3 grow border border-slate-900 border-l-0 border-r-0 flex flex-col items-center gap-2 pb-1 effect">
+                    <div class="text-center font-semibold font-sans text-black bg-white w-full border-b border-b-slate-900">Noite</div>
+                    <%-include("includes/eveningTimes")%>
+                </div>
+            </div>
+        </section>
+        <section class="flex flex-col bg-slate-700 w-11/12 h-fit rounded-lg gap-3 items-center">
+            <h1 class="text-xl text-white mt-2 tracking-wider text-center font-semibold leading-5">Informe os seguintes dados!</h1>
+            <form action="/clientes/clienteCriado" method="post" id="form-register" class="flex flex-col w-full p-2 gap-2 items-center">
+                <label for="inputScheduleName" class="flex flex-row gap-8">
+                    <i class="bi bi-person text-white"></i>
+                    <input type="text" name="inputScheduleName" class="outline-none p-px rounded-sm border border-sky-500 px-2"  id="inputScheduleName" placeholder="Digite seu nome...">
+                </label>
+                <label for="inputScheduleWhatsapp" class="flex flex-row gap-8">
+                    <i class="bi bi-whatsapp text-white"></i>
+                    <input type="text" name="inputScheduleWhatsapp"  class="outline-none p-px rounded-sm border border-sky-500 px-2" id="inputScheduleWhatsapp" placeholder="DDD 9 99999999 sem espaços" alt="O whatsapp deve ser preenchido dessa forma!">
+                </label>
+                <label for="inputScheduleDate" class="flex flex-row gap-8">
+                    <i class="bi bi-calendar text-white"></i>
+                    <input type="text" name="inputScheduleDate" class="outline-none p-px rounded-sm border border-sky-500 px-2"  id="inputScheduleDate" value="<%=date || '' %>" readonly placeholder="O dia do seu corte" >
+                </label>
+                <label for="inputScheduleHour" class="flex flex-row gap-8">
+                    <i class="bi bi-clock text-white"></i>
+                    <input type="text" name="inputScheduleHour" class="outline-none  p-px px-2 rounded-sm border border-sky-500"  id="inputScheduleHour" readonly placeholder="Seu horário">
+                </label>
+                <div class="flex flex-col justify-evenly items-start border border-slate-400 rounded-lg p-2">
+                    <h2 class="text-lg text-white text-center font-semibold">Quais serviços você vai querer?</h2>
+                    <label for="checkHair" class="flex flex-row w-full justify-between text-sky-300 font-semibold  tracking-wider capitalize font-mono">Cabelo:
+                        <input type="checkbox" name="checkHair" id="checkHair"  class="scale-150 block ">
+                    </label>
+                    <label for="checkBeard" class="flex flex-row w-full justify-between text-sky-300 font-semibold  tracking-wider capitalize font-mono">Barba:
+                        <input type="checkbox" name="checkBeard" id="checkBeard"  class="scale-150 block ">
+                    </label>
+                    <label for="checkEyeBrow" class="flex flex-row w-full justify-between text-sky-300 font-semibold  tracking-wider capitalize font-mono">Sobrancelha:
+                        <input type="checkbox" name="checkEyeBrow" id="checkEyeBrow" class="scale-150 block ">
+                    </label>
+                </div>
+                <button id="btn-register" class="px-2 py-px bg-sky-500 rounded-lg w-28 font-semibold ">Cadastrar Horário</button>
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>

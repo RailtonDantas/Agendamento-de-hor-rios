@@ -1,0 +1,8 @@
+
+<%if(availableEveningTimes.length > 0){%>
+
+    <% for(let c = 0; c < availableEveningTimes.length ; c++){%>
+        <div class="font-semibold w-11/12 h-6 border border-white rounded text-center sm:w-3/5 cursor-pointer hover:bg-black hover:text-white duration-500 availableTime "><%=availableEveningTimes[c]%></div>
+    <%}%>
+    
+<%}%>

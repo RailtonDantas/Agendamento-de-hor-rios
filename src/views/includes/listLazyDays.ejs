@@ -1,0 +1,11 @@
+<%if(lazyDays.length > 0){%>
+    <%for(let c = 0; c < lazyDays.length; c++){%>
+        <li class="w-full gap-2 flex flex-col justify-between items-center bg-white p-2 border border-black">
+            <div class="flex flex-row w-full justify-center gap-5 items-center">
+                <p class="text-black text-lg font-semibold"><%=lazyDays[c].lazyDay%></p>
+                <a href="/admin/deletarDias/<%=lazyDays[c].id%>" class="px-2 py-px bg-red-500 border border-black rounded-lg text-white font-semibold">Excluir</a>
+            </div>
+            <p class="text-center font-normal text-black"><%=lazyDays[c].reasonOfLazyDay %></p>
+        </li>
+    <%}%>
+<%}%>

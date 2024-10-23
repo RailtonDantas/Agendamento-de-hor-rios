@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen bg-slate-900 flex flex-col gap-2 items-center overflow-x-hidden ">
+    <main class="flex flex-col w-11/12 h-fit items-center gap-2">
+        <%for(let c = 0; c < allClients.length; c++){%>
+        <section class="flex flex-col w-full h-fit bg-white border border-slate-900 rounded-lg px-2 pb-2">
+            <h2 class="text-slate-900 text-lg tracking-wider font-mono text-center font-semibold">Clientes para o dia:<br>
+            <%=allClients[c].date%><i class="bi bi-calendar-check-fill"></i></h2>
+            <div class="flex flex-row h-fit w-fit gap-2 items-center">
+                <i class="bi bi-person-fill text-sky-700 scale-200"></i>
+                <i class="bi bi-arrow-right text-sky-700 scale-200"></i>
+                <p class="text-lg text-black font-sans font-semibold text-start"> Você tem <%=allClients[c].totalClients%> <%if(allClients[c].totalClients > 1){%> 
+                    <%='clientes'%>
+                <%}else{%>
+                    <%='cliente'%>
+                <%}%>
+                pra hoje!</p>
+            </div>
+            <div  class="flex flex-row h-fit w-fit gap-2 items-center">
+                <i class="bi bi-piggy-bank-fill text-sky-700"></i>
+                <i class="bi bi-arrow-right text-sky-700 scale-200"></i>
+                <p class="text-lg text-black font-sans font-semibold text-start"><span> R$ <%=allClients[c].estimatedTurnover%> de faturamento hoje!</span></p>
+            </div>
+            <ul class="sm:flex-row w-full flex gap-2 justify-center flex-wrap">
+                <%const clientsInCurrentDay = allClients[c].clients%>
+                <%let count = 1;%>
+                <%for(let key = 0; key < clientsInCurrentDay.length; key++){%>
+                <li class="border border-slate-900 flex flex-col h-fit items-center w-full sm:w-96 bg-slate-500 pb-2 rounded-lg">
+                    <h2 class="text-black text-lg tracking-wider font-mono text-center font-semibold">Cliente <%=count%></h2>
+                    <%count++%>
+                    <div class="flex flex-col  w-4/5">
+                        <p class="text-black text-lg font-bold font-sans">Nome: <%=clientsInCurrentDay[key].name%></p>
+                        <p class="text-black text-lg font-bold font-sans">Whatsapp: <%=clientsInCurrentDay[key].whatsapp%></p>
+                        <p class="text-black text-lg font-bold font-sans">Horário: <%=clientsInCurrentDay[key].hour%></p>
+                        <p class="text-black text-lg font-bold font-sans">Serviços:<%let values = Object.values(clientsInCurrentDay[key].services[0])%>
+                        <%for(let value of values){%>
+                            <%=value%>
+                        <%}%>
+                        </p>
+                    </div>
+                    <div class="flex flex-row justify-between gap-5 w-4/5">
+                    </div>
+                    <a href="/admin/deletarClientes/<%=clientsInCurrentDay[key]._id%>" class="p-2 bg-red-500 text-black rounded font-semibold border-black border text-lg mt-2">Deletar Cliente</a>
+                </li>
+                <%}%>
+            </ul>
+            <a href="/admin/deletarTodos/<%=allClients[c].date.replace(/[/]/g,'-')%>" class="bg-sky-500 p-2 text-black font-semibold border text-center border-black w-fit self-center mt-2 rounded-lg">Deletar todos os clientes do dia <br> <%=allClients[c].date%> <i class="bi bi-calendar-fill"></i></a>
+        </section>
+        <%}%>
+    </main>
+</body>
+</html>
