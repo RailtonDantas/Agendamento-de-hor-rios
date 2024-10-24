@@ -7,5 +7,6 @@ module.exports.globalMiddleware = (req,res,next) => {
     res.locals.invalidDate = req.flash('invalidDate');
     res.locals.notWorkInSunday =  req.flash('notWorkInSunday');
     res.locals.lazyDays = req.flash("allLazyDays");
+    res.locals.isLazyDay = req.flash("isLazyDay");
     next()
 }

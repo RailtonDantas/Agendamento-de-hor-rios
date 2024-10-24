@@ -1,5 +1,6 @@
 
 const hoursModel = require("../adminModels/createHoursModel").hoursModel;
+const lazyDayModel = require("../adminModels/lazyDaysModel").lazyDayModel;
 const clientsModel = require("./createClients").clientsModel;
 
 class searchingAvailableTimes{
@@ -65,6 +66,16 @@ class searchingAvailableTimes{
         const date = new Date(this.date);
         const day = date.getDay();
         return day == 5
+    }
+    async isLazyDay(){
+        const date = new Date(this.date)
+        console.log(date)
+        const verifyIfThatDateIsLazyDay = await lazyDayModel.find({lazyDay:date})
+        if(verifyIfThatDateIsLazyDay.length > 0){
+            console.log(verifyIfThatDateIsLazyDay)
+            return true
+        }
+        return false
     }
 }
 module.exports.searchingAvailableTimes = searchingAvailableTimes;

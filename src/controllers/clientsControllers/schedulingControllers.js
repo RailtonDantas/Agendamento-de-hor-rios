@@ -21,7 +21,7 @@ module.exports.searchingAvailableTimes = async (req,res,next) => {
     res.redirect("/clientes/agendamento")
     next()
 }
-module.exports.validDate = (req,res,next) => {
+module.exports.validDate = async (req,res,next) => {
     const timetableSearch = new timeTableSearchModel(req.body.inputDate);
     if(timetableSearch.verifyData()){
         req.flash('invalidDate','Não dá pra marcar um horário em <br> um dia que já passou')
@@ -38,6 +38,14 @@ module.exports.validDate = (req,res,next) => {
             return
         })
         return 
+    }
+    if(await timetableSearch.isLazyDay()){
+        req.flash('isLazyDay','A barbearia estará fechada nesse dia!');
+        req.session.save(() => {
+            res.redirect('/clientes/agendamento')
+            return
+        })
+        return
     }
     next()
 }
