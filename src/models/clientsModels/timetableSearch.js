@@ -56,7 +56,7 @@ class searchingAvailableTimes{
     isSunday(){
         const date = new Date(this.date)
         const day = date.getDay();
-        return day == 6
+        return day == 0
     }
     reformatDate(data){
         const dataSplit = data.split("/");
@@ -65,7 +65,7 @@ class searchingAvailableTimes{
     isSaturday(){
         const date = new Date(this.date);
         const day = date.getDay();
-        return day == 5
+        return day == 6
     }
     async isLazyDay(){
         const date = new Date(this.date)
